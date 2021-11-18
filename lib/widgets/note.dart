@@ -73,26 +73,39 @@ class NoteWidget extends StatelessWidget {
             );
           },
           child: ListTile(
-            title: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: Text(
-                notesList[index].title.isEmpty
-                    ? 'New Note'
-                    : notesList[index].title.length <= 15
-                        ? notesList[index].title
-                        : '${notesList[index].title.substring(0, 10)}...',
-                style: TextStyle(fontSize: 24, color: textColor),
+            title: Container(
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.symmetric(vertical: 5),
+              decoration: BoxDecoration(
+                  color: textColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(5)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    notesList[index].title.isEmpty
+                        ? 'New Note'
+                        : notesList[index].title.length <= 15
+                            ? notesList[index].title
+                            : '${notesList[index].title.substring(0, 10)}...',
+                    style: TextStyle(fontSize: 36, color: textColor),
+                  ),
+                  Text(
+                    notesList[index].description.isEmpty
+                        ? 'No specific description provided'
+                        : notesList[index].description.length <= 30
+                            ? notesList[index].description
+                            : '${notesList[index].description.substring(0, 30)}...',
+                    style: TextStyle(fontSize: 18, color: textColor),
+                  ),
+                ],
               ),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
               child: Text(
-                notesList[index].description.isEmpty
-                    ? 'No specific description provided'
-                    : notesList[index].description.length <= 30
-                        ? notesList[index].description
-                        : '${notesList[index].description.substring(0, 30)}...',
-                style: TextStyle(fontSize: 16, color: textColor),
+                notesList[index].timeCreated.toString(),
+                style: TextStyle(color: textColor, fontSize: 15),
               ),
             ),
             trailing: SizedBox(
