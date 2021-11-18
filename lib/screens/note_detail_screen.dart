@@ -6,8 +6,27 @@ import 'package:notes_app/theme/theme.dart';
 import 'package:notes_app/widgets/snackbar.dart';
 import 'package:provider/provider.dart';
 
-class NoteDetailScreen extends StatelessWidget {
+class NoteDetailScreen extends StatefulWidget {
   static const routeName = "/note-detail-screen";
+
+  @override
+  State<NoteDetailScreen> createState() => _NoteDetailScreenState();
+}
+
+class _NoteDetailScreenState extends State<NoteDetailScreen> {
+  var _titleFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _titleFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    _titleFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,14 +108,12 @@ class NoteDetailScreen extends StatelessWidget {
                       color: textColor.withOpacity(0.1),
                     ),
                     child: TextFormField(
+                      focusNode: _titleFocusNode,
                       keyboardType: TextInputType.text,
                       maxLength: 25,
                       controller: _titleController,
                       style: TextStyle(color: textColor, fontSize: 18),
                       onChanged: (newValue) {
-                        _titleController.selection = TextSelection.fromPosition(
-                            TextPosition(offset: _titleController.text.length));
-
                         _notes.updateNote(
                             _note.id, newValue, _descController.text);
                       },

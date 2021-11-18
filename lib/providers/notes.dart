@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:notes_app/classes/note.dart';
 
 class Notes with ChangeNotifier {
@@ -33,7 +34,8 @@ class Notes with ChangeNotifier {
         id: DateTime.now().toString(),
         title: title,
         description: desc,
-        timeCreated: DateTime.now(),
+        timeCreated:
+            DateFormat('dd-MM-yyyy').format(DateTime.now()),
         isPinned: false,
         isFavorite: false));
     notifyListeners();

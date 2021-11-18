@@ -2,7 +2,7 @@ class Note {
   final String id;
   String title;
   String description;
-  final DateTime timeCreated;
+  final String timeCreated;
   bool isPinned;
   bool isFavorite;
 
