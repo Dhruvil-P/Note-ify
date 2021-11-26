@@ -132,6 +132,10 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
                       maxLines: 10,
                       controller: _descController,
                       style: TextStyle(color: textColor, fontSize: 18),
+                      onChanged: (newValue) {
+                        _notes.updateNote(
+                            _note.id, _titleController.text, newValue);
+                      },
                     ),
                   ),
                   Padding(

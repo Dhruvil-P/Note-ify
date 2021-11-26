@@ -38,29 +38,37 @@ class NoteWidget extends StatelessWidget {
           return await showCupertinoDialog(
               context: context,
               builder: (context) {
-                return CupertinoAlertDialog(
+                return AlertDialog(
                   title: const Text(
-                    'Delete Note',
+                    'Delete Note?',
                     style: TextStyle(fontSize: 24),
+                    textAlign: TextAlign.center,
                   ),
                   actions: [
-                    CupertinoButton(
-                        child: Text(
-                          'Confirm',
-                          style: TextStyle(fontSize: 16, color: activeColor),
-                        ),
-                        onPressed: () {
-                          _notes.removeNote(notesList[index].id);
-                          Navigator.of(context).pop();
-                        }),
-                    CupertinoButton(
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(fontSize: 16, color: activeColor),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        })
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CupertinoButton(
+                            child: Text(
+                              'Delete',
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.redAccent),
+                            ),
+                            onPressed: () {
+                              _notes.removeNote(notesList[index].id);
+                              Navigator.of(context).pop();
+                            }),
+                        CupertinoButton(
+                            child: Text(
+                              'Cancel',
+                              style:
+                                  TextStyle(fontSize: 16, color: activeColor),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            })
+                      ],
+                    ),
                   ],
                 );
               });
@@ -104,7 +112,7 @@ class NoteWidget extends StatelessWidget {
             subtitle: Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
               child: Text(
-                notesList[index].timeCreated.toString(),
+                'Date Created: ${notesList[index].timeCreated.toString()}',
                 style: TextStyle(color: textColor, fontSize: 15),
               ),
             ),
